@@ -32,6 +32,12 @@ const config: HardhatUserConfig = {
       url: "https://pacific-rpc.manta.network/http",
       accounts: [process.env.WALLET_PRIVATE_KEY || ""],
     },
+    "manta-testnet": {
+      url: "https://manta-testnet.calderachain.xyz/http",
+      accounts: [process.env.WALLET_PRIVATE_KEY || ""],
+      chainId: 3441005,
+      gas: 21000000,
+    },
   },
   typechain: {
     outDir: "typechain",
