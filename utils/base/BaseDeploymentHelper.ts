@@ -300,7 +300,7 @@ export default abstract class BaseDeploymentHelper extends BaseHelper {
         ],
         token.symbol
       );
-
+      console.log(troveManager.address, wCollateral.address, core.priceFeedPyth.address);
       this.log("- Deploying collateral factory");
       await this.waitForTx(
         core.factory.deployNewInstance(
@@ -319,19 +319,24 @@ export default abstract class BaseDeploymentHelper extends BaseHelper {
           }
         )
       );
-
+      
       this.log("- Collateral deployed");
     }
 
     let delegate: BaseDelegate;
 
+    console.log("----------------");
+    console.log(wCollateral.address);
     const tmAddress = await core.factory.collatearlToTM(wCollateral.address);
+    this.log(tmAddress)
     const troveManager = await this.getContract<TroveManager>(
       "TroveManager",
       tmAddress
     );
-
+    
     this.log("- Deploying delegate with troveManager", troveManager.address);
+    this.log(tmAddress, wCollateral.address) 
+    this.log(core.borrowerOperations.address, token.address, core.onez.address)
     if (token.symbol === "WETH")
       delegate = await this.deployContract<BaseDelegate>(
         "WETHDelegate",
@@ -344,7 +349,8 @@ export default abstract class BaseDeploymentHelper extends BaseHelper {
         ],
         token.symbol
       );
-    else
+    else {
+      console.log(wCollateral.address, "cccccccccccccc")
       delegate = await this.deployContract<BaseDelegate>(
         "ERC20Delegate",
         [
@@ -356,6 +362,8 @@ export default abstract class BaseDeploymentHelper extends BaseHelper {
         ],
         token.symbol
       );
+    }
+      
 
     this.log(`------ Collateral Added ------`);
     return { wCollateral, delegate, troveManager };

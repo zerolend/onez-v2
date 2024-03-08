@@ -10,6 +10,7 @@
     "deploy:zksync:goerli-fork": "hardhat --config hardhat.config.zksync.ts deploy-zksync --script zksync_goerli_fork.ts",
     "deploy:zksync:goerli": "hardhat --config hardhat.config.zksync.ts deploy-zksync --script zksync_goerli.ts --network zkSyncTestnet",
     "deploy:zksync:mainnet-fork": "hardhat --config hardhat.config.zksync.ts deploy-zksync --script zksync_mainnet_fork.ts",
+    "deploy:manta:testnet": "hardhat --config hardhat.config.ts run scripts/deploy-manta-testnet.ts --network manta-testnet",
     "hardhat:local:run": "hardhat --config hardhat.config.ts run",
     "deploy-zk": "hardhat --config hardhat.config.zksync.ts deploy-zksync --script deploy.ts",
     "compile": "hardhat compile",
